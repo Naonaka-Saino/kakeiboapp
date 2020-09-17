@@ -1,6 +1,6 @@
 <h1>新規登録</h1>
 
-<% form_with model: @book, local: true do |f| %>
+<%=form_with model: @book, local: true do |f| %>
 <div class = "form-group">
     <label>年度</label>
     <%= f.number_field :year, class: "form-control" %>
