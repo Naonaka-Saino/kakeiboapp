@@ -20,4 +20,18 @@ class BooksController<ApplicationController
             render:new
         end
     end
+    
+    def edit
+        @book = Book.find(params[:id])
+    end
+    
+    def update
+        @book = Book.find(params[:id])
+        book_params=params.require(:book).permit(:year,:month,:inout,:category,:amount)
+        if @book.update(book_params)
+        redirect_to books_path
+        else
+        render:edit
+        end
+    end
 end
