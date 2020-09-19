@@ -15,8 +15,10 @@ class BooksController<ApplicationController
         book_params=params.require(:book).permit(:year,:month,:inout,:category,:amount)
         @book=Book.new(book_params)
         if @book.save
+            flash[:notice] = "登録しました"
         redirect_to books_path
         else
+            flash.now[:alert] = "登録失敗（空欄があります！）"
             render:new
         end
     end
@@ -29,9 +31,19 @@ class BooksController<ApplicationController
         @book = Book.find(params[:id])
         book_params=params.require(:book).permit(:year,:month,:inout,:category,:amount)
         if @book.update(book_params)
+        flash[:notice] = "更新しました。"
         redirect_to books_path
         else
+        flash.now[:alert] = "更新失敗（空欄があります！）"
         render:edit
         end
     end
+    
+    def destroy
+        @book = Book.find(params[:id])
+        @book.destroy
+        flash[:notice] = "削除しました。"
+        redirect_to books_path
+    end
+    
 end
