@@ -32,6 +32,8 @@
 </tr>
 
 <% sum = 0 %>
+<% income = 0 %>
+<% expend=0 %>
 
 <% @books.each do |book| %>
 <tr>
@@ -50,13 +52,14 @@ end
 
 <% if book.inout == 1 %>
  <% sum += book.amount %>
+ <% income += book.amount %>
 <% else %>
 <% sum -= book.amount %>
+<% expend += book.amount %>
 <% end %>
 <% end %>
 
 <tr>
-    <td></td>
     <td></td>
     <td>合計</td>
     <td><%= sum %>万円</td>
@@ -68,6 +71,8 @@ end
         "トントン"
     end
     %></td>
+    <td>収入<%= income %></td>
+    <td>支出<%= expend %></td>
 </tr>
 
 </table>
